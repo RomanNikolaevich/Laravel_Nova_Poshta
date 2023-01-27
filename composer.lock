@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe33f98a750b8c5a51b30c78bd3fab21",
+    "content-hash": "5cea3a17deccc58ff53a803955bab1bf",
     "packages": [
         {
             "name": "brick/math",
@@ -1613,6 +1613,62 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "lis-dev/nova-poshta-api-2",
+            "version": "0.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lis-dev/nova-poshta-api-2.git",
+                "reference": "0460cf3cf44b1bc078d0ea439ea8c197e718c0bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lis-dev/nova-poshta-api-2/zipball/0460cf3cf44b1bc078d0ea439ea8c197e718c0bb",
+                "reference": "0460cf3cf44b1bc078d0ea439ea8c197e718c0bb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LisDev\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Igor Ivashchenko",
+                    "homepage": "https://github.com/lis-dev/nova-poshta-api-2",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Team",
+                    "homepage": "https://github.com/lis-dev/nova-poshta-api-2/graphs/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "PHP class for API 2.0 ukrainian delivery company \"Nova Poshta\"",
+            "homepage": "https://github.com/lis-dev/",
+            "keywords": [
+                "delivery",
+                "delivery service",
+                "nova poshta",
+                "nova poshta api"
+            ],
+            "support": {
+                "issues": "https://github.com/lis-dev/nova-poshta-api-2/issues",
+                "source": "https://github.com/lis-dev/nova-poshta-api-2/tree/0.1.6"
+            },
+            "time": "2020-12-09T13:43:16+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7769,5 +7825,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
