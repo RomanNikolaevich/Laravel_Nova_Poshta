@@ -9,14 +9,14 @@ return new class extends Migration {
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('Ref')->unique(); //city code
-            $table->string('Description'); // city name (ukr)
-            $table->string('DescriptionRu'); //city name (rus)
-            $table->string('SettlementTypeDescription'); //city/village(ukr)
-            $table->string('SettlementTypeDescriptionRu'); //city/village(rus)
+            $table->string('ref')->unique(); //city code
+            $table->text('description'); // city name (ukr)
+            $table->text('description_ru'); //city name (rus)
+            $table->string('type'); //city/village(ukr)
+            $table->string('type_ru'); //city/village(rus)
             $table->timestamps();
 
-            $table->index('Ref'); //Adding a basic index
+            $table->index('ref'); //Adding a basic index
         });
     }
 

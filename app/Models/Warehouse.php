@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Warehouse extends Model
 {
-    protected $fillable = ['Description', 'DescriptionRu'];
+    protected $fillable = ['city_ref', 'description', 'description_ru'];
 
+    /**
+     *  Relationships
+     *
+     * @return BelongsTo
+     */
     public function cities():BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'ref');
     }
 }
