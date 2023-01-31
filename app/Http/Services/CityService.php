@@ -14,11 +14,11 @@ class CityService
     /**
      * @return Application|Factory|View
      */
-    public function getListFromDB(): Application|Factory|View
-    {
-        $cities = City::get();
-        return view('index', ['cities'=>$cities]);
-    }
+//    public function getListFromDB(): Application|Factory|View
+//    {
+//        $cities = City::get();
+//        return view('index', ['cities'=>$cities]);
+//    }
 
     /**
      * Get data from Api Niva Poshta

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\CityService;
+use App\Models\City;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use JsonException;
 
 class CityController extends Controller
@@ -17,11 +21,13 @@ class CityController extends Controller
     /**
      * Get data for select
      *
-     * @return mixed
+     * @return Application|Factory|View
      */
-    public function getListFromDB(): mixed
+    public function getListFromDB(): Application|Factory|View
     {
-        return $this->service->getListFromDB();
+        $cities = City::get();
+        return view('index', ['cities'=>$cities]);
+        //return $this->service->getListFromDB();
     }
 
     /**

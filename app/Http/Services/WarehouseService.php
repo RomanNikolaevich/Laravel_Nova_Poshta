@@ -15,11 +15,11 @@ class WarehouseService
     /**
      * @return Application|Factory|View
      */
-    public function getListFromDB():Application|Factory|View
-    {
-        $warehouses = Warehouse::get();
-        return view('index', ['warehouses'=>$warehouses]);
-    }
+//    public function getListFromDB():Application|Factory|View
+//    {
+//        $warehouses = Warehouse::get();
+//        return view('index', ['warehouses'=>$warehouses]);
+//    }
 
     /**
      * Get data from Api Niva Poshta
