@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Route;
 //    'warehouses' => 'WarehouseService@getListFromDB',
 //]);
 
-Route::get('/', [CityController::class, 'getListFromDB'])->name('cities');
-Route::get('city-get', [CityController::class, 'getDataFromApiNP'])->name('city.get-list');
-Route::get('city-store', [CityController::class, 'storeDataInDatabase'])->name('city.store-data-in-database');
+Route::get('/', [CityController::class, 'getCitiesFromDB'])->name('cities');
+Route::get('city-get', [CityController::class, 'getFromApi'])->name('city.get-list');
+Route::get('city-filtered', [CityController::class, 'getFilteredDataFromApi'])->name('city.get-filtered');
+Route::get('city-store', [CityController::class, 'addToDatabase'])->name('city.store-data-in-database');
 
 Route::get('warehouses', [WarehouseController::class, 'getListFromDB'])->name('warehouses');
 Route::get('warehouses-get', [WarehouseController::class, 'getDataFromApiNP'])->name('warehouses.get');

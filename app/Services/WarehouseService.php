@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Services;
 
 use App\Http\Controllers\CityController;
 use App\Models\Warehouse;
@@ -15,11 +15,10 @@ class WarehouseService
     /**
      * @return Application|Factory|View
      */
-//    public function getListFromDB():Application|Factory|View
-//    {
-//        $warehouses = Warehouse::get();
-//        return view('index', ['warehouses'=>$warehouses]);
-//    }
+    public function getWarehousesFromDB():Application|Factory|View
+    {
+        return Warehouse::get();
+    }
 
     /**
      * Get data from Api Niva Poshta
@@ -34,7 +33,7 @@ class WarehouseService
 
         //Get all warehouses
         $warehouses = json_decode($response, true, 512, JSON_THROW_ON_ERROR)["data"];//array
-        $cities = app(CityController::class)->getListFromDB();
+        $cities = app(CityController::class)->getCitiesFromDB();
 
         $cities = $cities['cities']->toArray();
 
