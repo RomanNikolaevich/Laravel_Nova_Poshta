@@ -9,7 +9,8 @@ return new class extends Migration {
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
-            $table->string('city_ref'); //code of warehous
+            $table->string('ref'); //code of warehous
+            $table->string('city_ref'); //code city of warehous
             $table->string('description'); //Description of warehous (ukr)
             $table->string('description_ru'); //Description of warehous (rus)
             $table->timestamps();

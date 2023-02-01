@@ -21,9 +21,9 @@ class CityController extends Controller
      * ONLY for denug!!!
      * @return mixed
      */
-    public function getFromApi():mixed
+    public function getByApi():mixed
     {
-        return $this->service->getFromApi();
+        return $this->service->getByApi();
     }
 
     /**
@@ -34,9 +34,9 @@ class CityController extends Controller
      * @return array
      * @throws JsonException
      */
-    public function getFilteredDataFromApi():array
+    public function getFilterByApi():array
     {
-        return $this->service->filterDataFromApi();
+        return $this->service->filterByApi();
     }
 
     /**

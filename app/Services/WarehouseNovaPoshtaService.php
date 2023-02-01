@@ -13,10 +13,11 @@ use JsonException;
 class WarehouseNovaPoshtaService
 {
     /**
-     * Get data from Api Niva Poshta
+     * Get data from Api Nova Poshta
+     *
      * @throws JsonException
      */
-    public function getDataFromApiNP():array
+    public function getByApi():array
     {
         $url = config('novaposhta.url');
         $data = config('novaposhta.data_warehouse');
@@ -47,10 +48,11 @@ class WarehouseNovaPoshtaService
      * @return void
      * @throws JsonException
      */
-    public function storeDataInDatabase():void
+    public function addToDatabase():void
     {
-        foreach ($this->getDataFromApiNP() as $warehouse) {
+        foreach ($this->getByApi() as $warehouse) {
             Warehouse::create([
+                'ref'            => $warehouse['Ref'],
                 'city_ref'       => $warehouse['CityRef'],
                 'description'    => $warehouse['Description'],
                 'description_ru' => $warehouse['DescriptionRu'],
@@ -61,7 +63,7 @@ class WarehouseNovaPoshtaService
     /**
      * @return Application|Factory|View
      */
-    public function getWarehousesFromDB():Application|Factory|View
+    public function getFromDatabase():Application|Factory|View
     {
         return Warehouse::get();
     }

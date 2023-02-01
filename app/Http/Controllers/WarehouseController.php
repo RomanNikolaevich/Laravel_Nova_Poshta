@@ -22,25 +22,25 @@ class WarehouseController extends Controller
      *
      * @throws JsonException
      */
-    public function getDataFromApiNP():array
+    public function getByApi():array
     {
-        return $this->service->getDataFromApiNP();
+        return $this->service->getByApi();
     }
 
     /**
      * @throws JsonException
      */
-    public function storeDataInDatabase()
+    public function addToDatabase()
     {
-        return $this->service->storeDataInDatabase();
+        return $this->service->addToDatabase();
     }
 
     /**
      * @return Application|Factory|View
      */
-    public function getListFromDB():Application|Factory|View
+    public function getFromDatabase():Application|Factory|View
     {
-        $warehouses = $this->service->getWarehousesFromDB();
+        $warehouses = $this->service->getFromDatabase();
         return view('index', ['warehouses'=>$warehouses]);
     }
 }
