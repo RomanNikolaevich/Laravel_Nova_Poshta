@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\WarehouseService;
-use App\Models\Warehouse;
+use App\Services\WarehouseService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -23,9 +22,8 @@ class WarehouseController extends Controller
      */
     public function getListFromDB():Application|Factory|View
     {
-        $warehouses = Warehouse::get();
+        $warehouses = $this->service->getWarehousesFromDB();
         return view('index', ['warehouses'=>$warehouses]);
-        //return $this->service->getListFromDB();
     }
 
     /**

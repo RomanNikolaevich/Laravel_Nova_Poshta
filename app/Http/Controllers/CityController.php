@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\CityServiceNovaPoshta;
-use App\Models\City;
+use App\Services\CityServiceNovaPoshta;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -19,23 +18,23 @@ class CityController extends Controller
     }
 
     /**
-     * Get data for select
-     *
-     * @return Application|Factory|View
+     * ONLY for denug!!!
+     * @return mixed
      */
-    public function getListFromDB(): Application|Factory|View
+    public function getFromApi():mixed
     {
-        $cities = City::get();
-        return view('index', ['cities'=>$cities]);
-        //return $this->service->getListFromDB();
+        return $this->service->getFromApi();
     }
 
     /**
      * Get data from API Nova Poshta
      *
+     * @param CityServiceNovaPoshta $cities
+     *
+     * @return array
      * @throws JsonException
      */
-    public function getDataFromApiNP()
+    public function getFilteredDataFromApi():array
     {
         return $this->service->filterDataFromApi();
     }
@@ -45,8 +44,20 @@ class CityController extends Controller
      *
      * @throws JsonException
      */
-    public function storeDataInDatabase()
+    public function addToDatabase():void
     {
-        return $this->service->storeDataInDatabase();
+        $this->service->addToDatabase();
+    }
+
+    /**
+     * Get data for select
+     *
+     * @return Application|Factory|View
+     */
+    public function getCitiesFromDB(): Application|Factory|View
+    {
+        $cities = $this->service->getCitiesFromDB();
+
+        return view('index', ['cities'=>$cities]);
     }
 }
