@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use JsonException;
 
-class CityServiceNovaPoshta
+class CityNovaPoshtaService
 {
     /**
      * Get data from Api Nova Poshta

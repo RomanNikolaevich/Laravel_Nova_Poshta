@@ -10,16 +10,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Http;
 use JsonException;
 
-class WarehouseService
+class WarehouseNovaPoshtaService
 {
-    /**
-     * @return Application|Factory|View
-     */
-    public function getWarehousesFromDB():Application|Factory|View
-    {
-        return Warehouse::get();
-    }
-
     /**
      * Get data from Api Niva Poshta
      * @throws JsonException
@@ -64,5 +56,13 @@ class WarehouseService
                 'description_ru' => $warehouse['DescriptionRu'],
             ]);
         }
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function getWarehousesFromDB():Application|Factory|View
+    {
+        return Warehouse::get();
     }
 }

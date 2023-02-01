@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CityServiceNovaPoshta;
+use App\Services\CityNovaPoshtaService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -10,11 +10,11 @@ use JsonException;
 
 class CityController extends Controller
 {
-    protected CityServiceNovaPoshta $service;
+    protected CityNovaPoshtaService $service;
 
     public function __construct()
     {
-        $this->service = app(CityServiceNovaPoshta::class);
+        $this->service = app(CityNovaPoshtaService::class);
     }
 
     /**
@@ -29,7 +29,7 @@ class CityController extends Controller
     /**
      * Get data from API Nova Poshta
      *
-     * @param CityServiceNovaPoshta $cities
+     * @param CityNovaPoshtaService $cities
      *
      * @return array
      * @throws JsonException
