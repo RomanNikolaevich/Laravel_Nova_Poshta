@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Warehouse extends Model
 {
-    protected $fillable = ['city_ref', 'description', 'description_ru'];
+    protected $fillable = ['ref','city_ref', 'description', 'description_ru'];
 
     /**
      *  Relationships

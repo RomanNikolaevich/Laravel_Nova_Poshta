@@ -13,7 +13,7 @@ class CityNovaPoshtaService
     /**
      * Get data from Api Nova Poshta
      */
-    public function getFromApi():Collection
+    public function getByApi():Collection
     {
         $url = config('novaposhta.url');
         $data = config('novaposhta.data_city');
@@ -28,9 +28,9 @@ class CityNovaPoshtaService
      * @return array
      * @throws JsonException
      */
-    public function filterDataFromApi():array
+    public function filterByApi():array
     {
-        $cities = app(CityController::class)->getFromApi();
+        $cities = app(CityController::class)->getByApi();
 
         $numberOfCities = config('novaposhta.number_of_cities');
         $excludedCities = config('novaposhta.excluded_cities');
@@ -60,7 +60,7 @@ class CityNovaPoshtaService
      */
     public function addToDatabase():void
     {
-        $cities = app(CityController::class)->getFilteredDataFromApi();
+        $cities = app(CityController::class)->getFilterByApi();
 
         foreach ($cities as $city) {
             City::create([
