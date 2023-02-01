@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\CityService;
+use App\Http\Services\CityServiceNovaPoshta;
 use App\Models\City;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -11,11 +11,11 @@ use JsonException;
 
 class CityController extends Controller
 {
-    protected CityService $service;
+    protected CityServiceNovaPoshta $service;
 
     public function __construct()
     {
-        $this->service = app(CityService::class);
+        $this->service = app(CityServiceNovaPoshta::class);
     }
 
     /**
@@ -35,9 +35,9 @@ class CityController extends Controller
      *
      * @throws JsonException
      */
-    public function getDataFromApiNP():array
+    public function getDataFromApiNP()
     {
-        return $this->service->getDataFromApiNP();
+        return $this->service->filterDataFromApi();
     }
 
     /**
