@@ -6,6 +6,8 @@ sail up -d
 sail artisan migrate
 
 запись в базу данных из API NovaPoshta:
+sail artisan command:add-cities
+sail artisan command:add-warehouses
 
 
 
