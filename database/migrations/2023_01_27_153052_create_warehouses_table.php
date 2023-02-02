@@ -5,21 +5,30 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up()
+    /**
+     * ref - code of warehouse
+     * city_ref - code city of warehouse, basic index
+     * description - Description of warehouse (ukr)
+     * description_ru - Description of warehouse (rus)
+     *
+     * @return void
+     */
+    public function up():void
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
-            $table->string('ref'); //code of warehous
-            $table->string('city_ref'); //code city of warehous
-            $table->string('description'); //Description of warehous (ukr)
-            $table->string('description_ru'); //Description of warehous (rus)
+            $table->string('ref')->unique();
+            $table->string('city_ref')->index();
+            $table->string('description');
+            $table->string('description_ru');
             $table->timestamps();
-
-            $table->index('city_ref'); //Adding a basic index
         });
     }
 
-    public function down()
+    /**
+     * @return void
+     */
+    public function down():void
     {
         Schema::dropIfExists('warehouses');
     }
