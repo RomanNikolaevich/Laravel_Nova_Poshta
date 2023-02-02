@@ -41,13 +41,23 @@ class CityController extends Controller
     }
 
     /**
+     * Get data for joins
+     *
+     * @return Collection
+     */
+    public function getFromDB():Collection
+    {
+       return $this->service->getFromDB();
+    }
+
+    /**
      * Get data for select
      *
      * @return Application|Factory|View
      */
-    public function getFromDB():Application|Factory|View
+    public function getView():Application|Factory|View
     {
-        $cities = $this->service->getFromDB();
+        $cities = $this->getFromDB();
 
         return view('index', ['cities' => $cities]);
     }
