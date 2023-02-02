@@ -1,34 +1,34 @@
 <?php
 
 return [
-    'url'              => "https://api.novaposhta.ua/v2.0/json/",
+    'url' => 'https://api.novaposhta.ua/v2.0/json/',
+
+    'api_key'          => env('NOVAPOSHTA_KEY'),
 
     /**
      * Settings for connecting to the API of Nova Poshta 2.0 (city)
      */
     'data_city'        => [
-        "apiKey"       => env('NOVAPOSHTA_KEY'),
-        "modelName"    => "Address",
-        "calledMethod" => "getCities",
+        'modelName'    => 'Address',
+        'calledMethod' => 'getCities',
     ],
 
     /**
      * Settings for connecting to the API of Nova Poshta 2.0 (warehouses)
      */
     'data_warehouse'   => [
-        "apiKey"       => env('NOVAPOSHTA_KEY'),
-        "modelName"    => "Address",
-        "calledMethod" => "getWarehouses",
+        'modelName'    => 'Address',
+        'calledMethod' => 'getWarehouses',
     ],
 
     /**
      * Localities that should not be included in the database
      */
     'excluded_cities'  => [
-        "Абрикосовка",
-        "Агайманы",
-        "Агрономичное",
-        "Адамполь",
+        'Абрикосовка',
+        'Агайманы',
+        'Агрономичное',
+        'Адамполь',
     ],
 
     /**

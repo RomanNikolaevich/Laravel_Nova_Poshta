@@ -2,68 +2,61 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\CityController;
 use App\Models\City;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
-use JsonException;
 
+/**
+ * Service for NovaPoshta 2.0 API
+ */
 class CityNovaPoshtaService
 {
     /**
      * Get data from Api Nova Poshta
+     * Get all cities (collection)
      */
     public function getByApi():Collection
     {
         $url = config('novaposhta.url');
         $data = config('novaposhta.data_city');
+        $key = config('novaposhta.api_key');
 
-        //Get all cities (collection)
-        return Http::post($url, $data)->collect('data');
+        $data[] = $key;
+
+        return Http::post($url, $data)
+            ->collect('data');
     }
 
     /**
-     * @param mixed $cities
+     * Add only the first 20 cities
+     * Exclude certain cities
+     * Add data to filtered cities array
      *
-     * @return array
-     * @throws JsonException
+     * @param Collection $cities
+     *
+     * @return Collection
      */
-    public function filterByApi():array
+    public function filtered(Collection $cities):Collection
     {
-        $cities = app(CityController::class)->getByApi();
-
         $numberOfCities = config('novaposhta.number_of_cities');
         $excludedCities = config('novaposhta.excluded_cities');
 
-        // Add only the first 20 cities
-        $limitCities = $cities->take($numberOfCities)->toArray();
-
-        // Exclude certain cities
-        $filteredCities = [];
-        foreach ($limitCities as $city) {
-            if (!in_array($city["DescriptionRu"], $excludedCities, true)) {
-                // Add data to filtered cities array
-                $filteredCities[] = $city;
-            }
-        }
-
-        return $filteredCities;
+        return $cities
+            ->take($numberOfCities)
+            ->whereNotIn('DescriptionRu', $excludedCities);
     }
 
     /**
      * Store data in database
      *
-     * @param array $cities
+     * @param Collection $cities
      *
      * @return void
-     * @throws JsonException
      */
-    public function addToDatabase():void
+    public function addToDB(Collection $cities):void
     {
-        $cities = app(CityController::class)->getFilterByApi();
-
-        foreach ($cities as $city) {
-            City::create([
+        foreach ($cities->toArray() as $city) {
+            City::updateOrCreate([
                 'ref'            => $city['Ref'],
                 'description'    => $city['Description'],
                 'description_ru' => $city['DescriptionRu'],
@@ -75,9 +68,10 @@ class CityNovaPoshtaService
 
     /**
      * Get data from database
-     * @return mixed
+     *
+     * @return Collection
      */
-    public function getCitiesFromDB():mixed
+    public function getFromDB():Collection
     {
         return City::get();
     }
