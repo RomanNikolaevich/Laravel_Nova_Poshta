@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class City extends Model
 {
-    protected $fillable = ['ref','description', 'description_ru', 'type', 'type_ru'];
+    protected $fillable = ['ref', 'description', 'description_ru', 'type', 'type_ru'];
 
     /**
      * Relationships
@@ -16,6 +16,6 @@ class City extends Model
      */
     public function warehouses():HasMany
     {
-        return $this->hasMany(Warehouse::class, 'city_ref');
+        return $this->hasMany(Warehouse::class, 'city_ref', 'ref');
     }
 }

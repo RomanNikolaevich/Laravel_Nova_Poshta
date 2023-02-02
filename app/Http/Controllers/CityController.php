@@ -6,7 +6,7 @@ use App\Services\CityNovaPoshtaService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use JsonException;
+use Illuminate\Support\Collection;
 
 class CityController extends Controller
 {
@@ -18,35 +18,26 @@ class CityController extends Controller
     }
 
     /**
-     * ONLY for denug!!!
-     * @return mixed
+     * ONLY for debug!!!
+     * Get filtered cities from API Nova Poshta
+     *
+     * @return Collection
      */
-    public function getByApi():mixed
+    public function getByApi():Collection
     {
-        return $this->service->getByApi();
+        return $this->service->filtered($this->service->getByApi());
     }
 
     /**
-     * Get data from API Nova Poshta
-     *
-     * @param CityNovaPoshtaService $cities
-     *
-     * @return array
-     * @throws JsonException
+     * Store cities in database
      */
-    public function getFilterByApi():array
+    public function addToDB():void
     {
-        return $this->service->filterByApi();
-    }
-
-    /**
-     * Store data in database
-     *
-     * @throws JsonException
-     */
-    public function addToDatabase():void
-    {
-        $this->service->addToDatabase();
+        $cities = $this->service->getByApi();
+        if ($cities) {
+            $cities = $this->service->filtered($cities);
+            $this->service->addToDB($cities);
+        }
     }
 
     /**
@@ -54,10 +45,10 @@ class CityController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function getCitiesFromDB(): Application|Factory|View
+    public function getFromDB():Application|Factory|View
     {
-        $cities = $this->service->getCitiesFromDB();
+        $cities = $this->service->getFromDB();
 
-        return view('index', ['cities'=>$cities]);
+        return view('index', ['cities' => $cities]);
     }
 }

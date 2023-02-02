@@ -9,11 +9,15 @@
 </head>
 
 <body>
-<li><a href="{{route('city.get-list')}}">Get cities from API Nova Poshta</a></li>
-<li><a href="{{route('city.store-data-in-database')}}">Store data of cities in database</a></li>
-<br>
-<li><a href="{{route('warehouses.get')}}">Get warehouses from API Nova Poshta</a></li>
-<li><a href="{{route('warehouses.store-data-in-database')}}">Store data of warehouses in database</a></li>
+<span style="color:red">LINKS - ONLY FOR DEBUG TEST</span>
+<ul>
+    <li><a href="{{route('city.get-list')}}">Get cities from API Nova Poshta</a></li>
+    <li><a href="{{route('city.store-data-in-database')}}">Store data of cities in database</a></li>
+    <br>
+    <li><a href="{{route('warehouses.get')}}">Get warehouses from API Nova Poshta</a></li>
+    <li><a href="{{route('warehouses.store-data-in-database')}}">Store data of warehouses in database</a></li>
+</ul>
+
 
 
 <div id="container">
@@ -25,26 +29,26 @@
                 <p style="font-size: 12px; font-family: verdana, geneva,serif;">Оберіть місце для доставки вантажу</p>
             </div>
 
-{{--            <select>--}}
-{{--                @foreach($cities as $city)--}}
-{{--                    @foreach($warehouses as $warehouse)--}}
-{{--                        <option value="{{ $city->ref }}">{{ $city->description ?? '' }}</option>--}}
-{{--                        @if( $city->ref === $warehouse->city_ref)--}}
-{{--                            <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>--}}
-{{--                        @endif--}}
+            {{--            <select>--}}
+            {{--                @foreach($cities as $city)--}}
+            {{--                    @foreach($warehouses as $warehouse)--}}
+            {{--                        <option value="{{ $city->ref }}">{{ $city->description ?? '' }}</option>--}}
+            {{--                        @if( $city->ref === $warehouse->city_ref)--}}
+            {{--                            <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>--}}
+            {{--                        @endif--}}
 
-{{--                    @endforeach--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
+            {{--                    @endforeach--}}
+            {{--                @endforeach--}}
+            {{--            </select>--}}
             <select>
-                @foreach($cities as $city)
-                    <option value="{{ $city->ref }}">{{ $city->description }}</option>
-                @endforeach
+                {{--                @foreach($cities as $city)--}}
+                {{--                    <option value="{{ $city->ref }}">{{ $city->description }}</option>--}}
+                {{--                @endforeach--}}
             </select>
             <select>
-                @foreach($warehouses as $warehouse)
-                    <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>
-                @endforeach
+                {{--                @foreach($warehouses as $warehouse)--}}
+                {{--                    <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>--}}
+                {{--                @endforeach--}}
             </select>
         </form>
 
