@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CityNovaPoshtaService;
 use App\Services\WarehouseNovaPoshtaService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -13,9 +14,12 @@ class WarehouseController extends Controller
 {
     protected WarehouseNovaPoshtaService $service;
 
+    protected CityNovaPoshtaService $cityService;
+
     public function __construct()
     {
         $this->service = app(WarehouseNovaPoshtaService::class);
+        $this->cityService = app(CityNovaPoshtaService::class);
     }
 
     /**
@@ -31,13 +35,11 @@ class WarehouseController extends Controller
 
     /**
      * Store warehouses in database
-     *
-     * @throws JsonException
      */
     public function addToDB():void
     {
         $warehouses = $this->service->getByApi();
-        $cities = app(CityController::class)->getFromDB();
+        $cities = $this->cityService->getFromDB();
         if ($warehouses) {
             $warehouses = $this->service->filtered($warehouses, $cities);
             $this->service->addToDB($warehouses);

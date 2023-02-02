@@ -30,20 +30,14 @@ class WarehouseNovaPoshtaService
 
     /**
      * @param Collection $warehouses
-     * @param            $cities
+     * @param Collection $cities
      *
      * @return Collection
      */
-    public function filtered(Collection $warehouses, $cities):Collection
+    public function filtered(Collection $warehouses, Collection $cities):Collection
     {
         return $warehouses->filter(function ($warehouse) use ($cities) {
-            foreach ($cities as $city) {
-                if ($city['ref'] === $warehouse['CityRef']) {
-                    return true;
-                }
-            }
-
-            return false;
+            return $cities->contains('ref', $warehouse['CityRef']);
         });
     }
 
