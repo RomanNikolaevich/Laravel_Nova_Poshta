@@ -5,7 +5,7 @@
     <meta name="robots" content="index, follow"/>
     <title>Вартість доставки - «Нова Пошта»| Доставка майбутнього</title>
     <meta name="description"
-          content="Вартість доставки | Нова Пошта – Швидка та надійна доставка★ Найбільша мережа відділень по всій Україні✔ Доставка протягом 1-го дня✔ Кур’єрська доставка✔ Клієнтська підтримка 24/7 ☎0-800-500-609"/>
+          content="Вартість доставки | Нова Пошта – Швидка та надійна доставка"/>
 </head>
 
 <body>
@@ -17,7 +17,6 @@
     <li><a href="{{route('warehouses.get')}}">Get warehouses from API Nova Poshta</a></li>
     <li><a href="{{route('warehouses.store-data-in-database')}}">Store data of warehouses in database</a></li>
 </ul>
-
 
 
 <div id="container">
@@ -40,16 +39,18 @@
             {{--                    @endforeach--}}
             {{--                @endforeach--}}
             {{--            </select>--}}
-            <select>
-                {{--                @foreach($cities as $city)--}}
-                {{--                    <option value="{{ $city->ref }}">{{ $city->description }}</option>--}}
-                {{--                @endforeach--}}
-            </select>
-            <select>
-                {{--                @foreach($warehouses as $warehouse)--}}
-                {{--                    <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>--}}
-                {{--                @endforeach--}}
-            </select>
+            <label>
+                <select>
+                    @foreach($cities as $city)
+                        <option value="{{ $city->ref }}">{{ $city->description }}</option>
+                    @endforeach
+                </select>
+            </label>
+            {{--            <select>--}}
+            {{--                                @foreach($warehouses as $warehouse)--}}
+            {{--                                    <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>--}}
+            {{--                                @endforeach--}}
+            {{--            </select>--}}
         </form>
 
     </div>
