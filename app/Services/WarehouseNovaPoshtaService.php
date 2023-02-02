@@ -2,56 +2,63 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\CityController;
 use App\Models\Warehouse;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
-use JsonException;
 
 class WarehouseNovaPoshtaService
 {
     /**
      * Get data from Api Nova Poshta
      *
-     * @throws JsonException
+     * @return Collection
      */
-    public function getByApi():array
+    public function getByApi():Collection
     {
         $url = config('novaposhta.url');
         $data = config('novaposhta.data_warehouse');
+        $key = config('novaposhta.api_key');
 
-        $response = Http::post($url, $data);
+        $data[] = $key;
 
-        //Get all warehouses
-        $warehouses = json_decode($response, true, 512, JSON_THROW_ON_ERROR)["data"];//array
-        $cities = app(CityController::class)->getCitiesFromDB();
+        return Http::post($url, $data)
+            ->collect('data');
+    }
 
-        $cities = $cities['cities']->toArray();
-
-        $filtered_warehouses = [];
-        foreach ($warehouses as $warehouse) {
+    /**
+     * @param Collection $warehouses
+     * @param            $cities
+     *
+     * @return Collection
+     */
+    public function filtered(Collection $warehouses, $cities):Collection
+    {
+        return $warehouses->filter(function ($warehouse) use ($cities) {
             foreach ($cities as $city) {
                 if ($city['ref'] === $warehouse['CityRef']) {
-                    $filtered_warehouses[] = $warehouse;
+                    return true;
                 }
             }
-        }
 
-        return $filtered_warehouses;
+            return false;
+        });
     }
 
     /**
      * Store data in database
      *
+     * @param Collection $warehouses
+     *
      * @return void
-     * @throws JsonException
+     *
      */
-    public function addToDatabase():void
+    public function addToDB(Collection $warehouses):void
     {
-        foreach ($this->getByApi() as $warehouse) {
-            Warehouse::create([
+        foreach ($warehouses as $warehouse) {
+            Warehouse::updateOrCreate([
                 'ref'            => $warehouse['Ref'],
                 'city_ref'       => $warehouse['CityRef'],
                 'description'    => $warehouse['Description'],
@@ -63,7 +70,7 @@ class WarehouseNovaPoshtaService
     /**
      * @return Application|Factory|View
      */
-    public function getFromDatabase():Application|Factory|View
+    public function getFromDB():Application|Factory|View
     {
         return Warehouse::get();
     }

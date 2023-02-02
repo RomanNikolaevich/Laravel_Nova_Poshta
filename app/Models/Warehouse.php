@@ -16,6 +16,6 @@ class Warehouse extends Model
      */
     public function cities():BelongsTo
     {
-        return $this->belongsTo(City::class, 'ref');
+        return $this->belongsTo(City::class, 'ref', 'city_ref');
     }
 }
