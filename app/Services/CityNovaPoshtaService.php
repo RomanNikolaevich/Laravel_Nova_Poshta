@@ -55,7 +55,7 @@ class CityNovaPoshtaService
      */
     public function addToDB(Collection $cities):void
     {
-        foreach ($cities->toArray() as $city) {
+        foreach ($cities as $city) {
             City::updateOrCreate([
                 'ref'            => $city['Ref'],
                 'description'    => $city['Description'],
