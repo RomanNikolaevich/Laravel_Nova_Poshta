@@ -62,9 +62,9 @@ class WarehouseNovaPoshtaService
     }
 
     /**
-     * @return Application|Factory|View
+     * @return Collection
      */
-    public function getFromDB():Application|Factory|View
+    public function getFromDB():Collection
     {
         return Warehouse::get();
     }
