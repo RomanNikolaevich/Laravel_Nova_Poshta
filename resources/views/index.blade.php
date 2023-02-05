@@ -6,6 +6,11 @@
     <title>Вартість доставки - «Нова Пошта»| Доставка майбутнього</title>
     <meta name="description"
           content="Вартість доставки | Нова Пошта – Швидка та надійна доставка"/>
+    <script
+        src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -19,43 +24,60 @@
 </ul>
 
 
-<div id="container">
-    <div id="wrapper" class="clearfix">
-        <form method="post" enctype="multipart/form-data" action="">
-            @csrf
-            <h1 class="page_title">Вартість доставки</h1>
-            <div class="text desc">
-                <p style="font-size: 12px; font-family: verdana, geneva,serif;">Оберіть місце для доставки вантажу</p>
-            </div>
+<div>
+    <form method="post" enctype="multipart/form-data" action="/calculate-delivery-cost">
+        @csrf
+        <h1 class="page_title">Вартість доставки</h1>
+        <div class="text desc">
+            <p style="font-size: 12px; font-family: verdana, geneva,serif;">Оберіть місце для доставлення
+                вантажу</p>
+        </div>
 
-            {{--            <select>--}}
-            {{--                @foreach($cities as $city)--}}
-            {{--                    @foreach($warehouses as $warehouse)--}}
-            {{--                        <option value="{{ $city->ref }}">{{ $city->description ?? '' }}</option>--}}
-            {{--                        @if( $city->ref === $warehouse->city_ref)--}}
-            {{--                            <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>--}}
-            {{--                        @endif--}}
-
-            {{--                    @endforeach--}}
-            {{--                @endforeach--}}
-            {{--            </select>--}}
+        <label>
+            <select>
+                @foreach($cities as $city)
+                    <option value="{{ $city->ref }}">{{ $city->description }}</option>
+                @endforeach
+            </select>
+        </label>
+        @isset($warehouses)
             <label>
                 <select>
-                    @foreach($cities as $city)
-                        <option value="{{ $city->ref }}">{{ $city->description }}</option>
+                    @foreach($warehouses as $warehouse)
+                        @if($city->ref === $warehouse->city_ref )
+                            <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>
+                        @else
+                            <option value=""> -----</option>
+                        @endif
                     @endforeach
                 </select>
             </label>
-            {{--            <select>--}}
-            {{--                                @foreach($warehouses as $warehouse)--}}
-            {{--                                    <option value="{{ $warehouse->city_ref }}">{{ $warehouse->description }}</option>--}}
-            {{--                                @endforeach--}}
-            {{--            </select>--}}
-        </form>
-
-    </div>
-    <div id="clear"></div>
+        @endisset
+        <br>
+        <p style="font-size: 12px; font-family: verdana, geneva,serif;">Введіть вартість вантажу</p>
+        <label>
+            <input type="text" name="packageCost" id="package-cost-input" class="form-control">
+        </label>
+        <button type="button" name="submit">Розрахувати доставку</button>
+    </form>
+    <p style="font-size: 12px; font-family: verdana, geneva,serif;">Розрахункова вартість доставлення складає:</p>
+    <p id="delivery-cost-service"></p>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $.ajax({
+            type: 'POST',
+            url: '/calculate-delivery-cost',
+            data: {
+                packageCost: $('#package-cost-input').val(),
+            },
+            success: function (data) {
+                $('#delivery-cost-service').html(data);
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
